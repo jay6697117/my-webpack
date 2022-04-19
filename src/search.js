@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import './css/search.less';
+import logo from './img/logo.png';
 
 class Search extends React.Component {
   constructor() {
@@ -16,9 +17,8 @@ class Search extends React.Component {
   render() {
     return (
       <div className='search-text'>
-        <button onClick={this.handleClick.bind(this)}>
-          {this.state.str}
-        </button>
+        <img src={logo} alt='logo' />
+        <button onClick={this.handleClick.bind(this)}>{this.state.str}</button>
       </div>
     );
   }
