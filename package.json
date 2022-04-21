@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --watch"
+    "build": "rimraf dist/* & npm run copy && webpack --watch",
+    "copy": "cp ./index.html ./dist"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "less": "^3.13.1",
     "less-loader": "^5.0.0",
     "style-loader": "^2.0.0",
+    "url-loader": "^1.1.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
