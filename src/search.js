@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import './css/search.less';
 import logo from './img/logo.png';
-console.log('logo', logo)
+// console.log('logo:', logo);
 
 class Search extends React.Component {
   constructor() {
     super();
     this.state = {
-      str: 'Search Text 66'
+      str: 'Search Text 888'
     };
   }
   handleClick() {

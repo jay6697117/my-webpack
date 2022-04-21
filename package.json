@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist/* & npm run copy && webpack --watch",
+    "build": "rimraf dist/* & npm run copy && webpack",
+    "build:w": "rimraf dist/* & npm run copy && webpack --watch",
     "copy": "cp ./index.html ./dist"
   },
   "keywords": [],
