@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const __rootname = process.cwd();
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
   entry: { app: path.resolve(__rootname, './src/index.js'), search: path.resolve(__rootname, './src/search.js') },
   output: {
     path: path.resolve(__rootname, './dist'),
-    filename: '[name].js'
+    filename: '[name]_[chunkhash:8].js'
   },
   module: {
     rules: [
@@ -31,7 +31,9 @@ module.exports = {
       },
       {
         test: /\.(le|c)ss$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        // MiniCssExtractPlugin.loader没办法和style-loader一起使用
+        // use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'less-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
@@ -39,22 +41,32 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10240 // 10240 byte === 10k byte
+              // limit: 10240 // 10240 byte === 10k byte
+              limit: 1024, //测试文件指纹
+              //这里的hash实际上是contenthash
+              name: '[name]_[hash:8].[ext]'
             }
           }
         ]
       },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
-        use: 'file-loader'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              //这里的hash实际上是contenthash
+              name: '[name]_[hash:8].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
 
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  devServer: {
-    port: 8080,
-    contentBase: path.resolve(__rootname, './dist'),
-    hot: true
-  }
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash:8].css'
+    })
+  ]
 };
