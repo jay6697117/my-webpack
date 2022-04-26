@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  // mode: 'production',
-  mode: 'development',
+  mode: 'production',
   //默认 false，也就是不开启
   watch: true,
   //只有开启监听模式时，watchOptions才有意义

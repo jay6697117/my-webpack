@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  // mode: 'production',
   mode: 'development',
   //默认 false，也就是不开启
   watch: true,
