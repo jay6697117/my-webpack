@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.js --open",
-    "build": "rimraf dist/* & npm run copy && webpack --config webpack.prod.js",
-    "build:watch": "rimraf dist/* & npm run copy && webpack --config webpack.prod.js --watch",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.js --open",
+    "build": "rimraf dist/* & npm run copy && webpack --config ./build/webpack.prod.js",
+    "build:watch": "rimraf dist/* & npm run copy && webpack --config ./build/webpack.prod.js --watch",
     "copy": "cp ./index.html ./dist"
   },
   "keywords": [],

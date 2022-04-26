@@ -9,7 +9,7 @@ class Search extends React.Component {
   constructor() {
     super();
     this.state = {
-      str: 'Search Text 666'
+      str: 'Search Text 6'
     };
   }
   handleClick() {
