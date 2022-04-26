@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
+  /*
   //默认 false，也就是不开启
   watch: true,
   //只有开启监听模式时，watchOptions才有意义
@@ -14,6 +14,8 @@ module.exports = {
     //判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
     poll: 1000
   },
+  */
+  mode: 'development',
   //入口
   entry: { app: './src/index.js', search: './src/search.js' },
   output: {
