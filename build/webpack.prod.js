@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const __rootname = process.cwd();
 
 module.exports = {
   /*
@@ -17,9 +18,9 @@ module.exports = {
   */
   mode: 'production',
   //入口
-  entry: { app: './src/index.js', search: './src/search.js' },
+  entry: { app: path.resolve(__rootname, './src/index.js'), search: path.resolve(__rootname, './src/search.js') },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__rootname, './dist'),
     filename: '[name].js'
   },
   module: {
@@ -49,10 +50,11 @@ module.exports = {
       }
     ]
   },
+
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     port: 8080,
-    contentBase: './dist',
+    contentBase: path.resolve(__rootname, './dist'),
     hot: true
   }
 };
