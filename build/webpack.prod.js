@@ -72,9 +72,13 @@ module.exports = {
     }),
     new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
     new HtmlWebpackPlugin({
+      //模版里面可以用ejs语法
       template: path.resolve(__rootname, './public/index.html'),
+      //打包出来的html文件名称
       filename: 'index.html',
+      //指定生成的html要使用哪些chunk
       chunks: ['app'],
+      //打包出来的chunk中的文件自动注入到生成的html中来
       inject: true,
       minify: {
         html5: true,
@@ -86,9 +90,13 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
+      //模版里面可以用ejs语法
       template: path.resolve(__rootname, './public/search.html'),
+      //打包出来的html文件名称
       filename: 'search.html',
+      //指定生成的html要使用哪些chunk
       chunks: ['search'],
+      //打包出来的chunk中的文件自动注入到生成的html中来
       inject: true,
       minify: {
         html5: true,
