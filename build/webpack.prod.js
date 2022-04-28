@@ -70,6 +70,34 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
     }),
-    new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') })
+    new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__rootname, './public/index.html'),
+      filename: 'index.html',
+      chunks: ['app'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__rootname, './public/search.html'),
+      filename: 'search.html',
+      chunks: ['search'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    })
   ]
 };
