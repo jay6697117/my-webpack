@@ -86,7 +86,8 @@ module.exports = {
         preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false
+        // removeComments: false
+        removeComments: true
       }
     }),
     new HtmlWebpackPlugin({
