@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const __rootname = process.cwd();
 
 module.exports = {
@@ -107,6 +108,8 @@ module.exports = {
         minifyJS: true,
         removeComments: false
       }
-    })
+    }),
+    // 默认会删除 output 指定的输出⽬录
+    new CleanWebpackPlugin()
   ]
 };

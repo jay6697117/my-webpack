@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   /*
@@ -49,7 +50,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // 默认会删除 output 指定的输出⽬录
+    new CleanWebpackPlugin()
+  ],
   devServer: {
     port: 8080,
     contentBase: './dist',
