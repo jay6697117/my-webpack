@@ -1,10 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import './css/index.css';
+import './css/common.css';
 import './css/search.less';
 import logo from './img/logo.png';
-// console.log('logo:', logo);
 
 class Search extends React.Component {
   constructor() {
