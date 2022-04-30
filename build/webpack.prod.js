@@ -36,7 +36,21 @@ module.exports = {
         test: /\.(le|c)ss$/,
         // MiniCssExtractPlugin.loader没办法和style-loader一起使用
         // use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'less-loader']
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                require('autoprefixer')({
+                  browsers: ['last 2 version', '>1%', 'not ie <= 8']
+                });
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
