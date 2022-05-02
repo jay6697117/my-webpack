@@ -23,7 +23,7 @@ module.exports = {
   //入口
   entry: { index: path.resolve(__rootname, './src/index.js'), search: path.resolve(__rootname, './src/search.js') },
   output: {
-    path: path.resolve(__rootname, './dist/index'),
+    path: path.resolve(__rootname, './dist'),
     filename: '[name]_[chunkhash:8].js'
   },
   module: {
