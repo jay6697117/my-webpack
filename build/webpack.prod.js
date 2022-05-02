@@ -23,7 +23,7 @@ module.exports = {
   //入口
   entry: { index: path.resolve(__rootname, './src/index.js'), search: path.resolve(__rootname, './src/search.js') },
   output: {
-    path: path.resolve(__rootname, './dist'),
+    path: path.resolve(__rootname, './dist/index'),
     filename: '[name]_[chunkhash:8].js'
   },
   module: {
@@ -98,7 +98,7 @@ module.exports = {
     new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
     new HtmlWebpackPlugin({
       //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/index/index.html'),
+      template: path.resolve(__rootname, './public/index.html'),
       //打包出来的html文件名称
       filename: 'index.html',
       //指定生成的html要使用哪些chunk
@@ -117,9 +117,9 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/search/index.html'),
+      template: path.resolve(__rootname, './public/search.html'),
       //打包出来的html文件名称
-      filename: 'index.html',
+      filename: 'search.html',
       //指定生成的html要使用哪些chunk
       chunks: ['search'],
       //打包出来的chunk中的文件自动注入到生成的html中来
