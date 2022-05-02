@@ -18,7 +18,7 @@ module.exports = {
   */
   mode: 'development',
   //入口
-  entry: { app: './src/index.js', search: './src/search.js' },
+  entry: { index: './src/index.js', search: './src/search.js' },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].js'
