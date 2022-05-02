@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 const __rootname = process.cwd();
 
 module.exports = {
@@ -134,6 +135,7 @@ module.exports = {
       }
     }),
     // 默认会删除 output 指定的输出⽬录
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new HTMLInlineCSSWebpackPlugin()
   ]
 };
