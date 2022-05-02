@@ -133,7 +133,8 @@ module.exports = {
         removeComments: false
       }
     }),
-    new HTMLInlineCSSWebpackPlugin(),
+    // CSS 内联
+    // new HTMLInlineCSSWebpackPlugin(),
     // 默认会删除 output 指定的输出⽬录
     new CleanWebpackPlugin()
   ]
