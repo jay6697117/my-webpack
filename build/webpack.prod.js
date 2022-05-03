@@ -6,6 +6,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const __rootname = process.cwd();
 
+console.log('目录:', glob.sync(path.join(__rootname, './src/*/index.js')));
+
 module.exports = {
   /*
   //默认 false，也就是不开启
@@ -22,7 +24,10 @@ module.exports = {
   */
   mode: 'production',
   //入口
-  entry: { index: path.resolve(__rootname, './src/index.js'), search: path.resolve(__rootname, './src/search.js') },
+  entry: {
+    index: path.resolve(__rootname, './src/index/index.js'),
+    search: path.resolve(__rootname, './src/search/index.js')
+  },
   output: {
     path: path.resolve(__rootname, './dist'),
     filename: '[name]_[chunkhash:8].js'
@@ -98,7 +103,7 @@ module.exports = {
     new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
     new HtmlWebpackPlugin({
       //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/index.html'),
+      template: path.resolve(__rootname, './public/index/index.html'),
       //打包出来的html文件名称
       filename: 'index.html',
       //指定生成的html要使用哪些chunk
@@ -117,7 +122,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/search.html'),
+      template: path.resolve(__rootname, './public/search/index.html'),
       //打包出来的html文件名称
       filename: 'search.html',
       //指定生成的html要使用哪些chunk

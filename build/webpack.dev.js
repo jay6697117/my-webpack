@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const __rootname = process.cwd();
 
 module.exports = {
   /*
@@ -18,9 +19,12 @@ module.exports = {
   */
   mode: 'development',
   //入口
-  entry: { index: './src/index.js', search: './src/search.js' },
+  entry: {
+    index: path.resolve(__rootname, './src/index/index.js'),
+    search: path.resolve(__rootname, './src/search/index.js')
+  },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__rootname, './dist'),
     filename: '[name].js'
   },
   module: {
@@ -57,7 +61,7 @@ module.exports = {
   ],
   devServer: {
     port: 8080,
-    contentBase: './dist',
+    contentBase: path.resolve(__rootname, './dist'),
     hot: true
   }
 };
