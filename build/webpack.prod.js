@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const __rootname = process.cwd();
 
-console.log('目录:', glob.sync(path.join(__rootname, './src/*/index.js')));
+console.log('入口目录:', glob.sync(path.join(__rootname, './src/*/index.js')));
 
 module.exports = {
   /*
