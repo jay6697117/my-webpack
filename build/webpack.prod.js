@@ -7,7 +7,52 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const __rootname = process.cwd();
 
-console.log('入口目录:', glob.sync(path.join(__rootname, './src/*/index.js')));
+const setMPA = () => {
+  const entry = {};
+  const htmlWebpackPlugins = [];
+  const entryFiles = glob.sync(path.join(__rootname, './src/*/index.js'));
+  // console.log('entryFiles:', entryFiles)
+
+  entryFiles.map(item => {
+    const entryFile = item;
+    const match = entryFile.match(/src\/(.*)\/index\.js/);
+    const pageName = match && match[1];
+    // console.log('entryFile:', entryFile);
+    // console.log('pageName:', pageName);
+
+    entry[pageName] = entryFile;
+
+    htmlWebpackPlugins.push(
+      new HtmlWebpackPlugin({
+        //模版里面可以用ejs语法
+        template: path.resolve(__rootname, `./public/index/${pageName}.html`),
+        //打包出来的html文件名称
+        filename: `${pageName}.html`,
+        //指定生成的html要使用哪些chunk
+        chunks: [pageName],
+        //打包出来的chunk中的文件自动注入到生成的html中来
+        inject: true,
+        minify: {
+          html5: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: false,
+          minifyCSS: true,
+          minifyJS: true,
+          removeComments: false
+        }
+      })
+    );
+  });
+
+  return {
+    entry,
+    htmlWebpackPlugins
+  };
+};
+
+const { entry, htmlWebpackPlugins } = setMPA();
+// console.log('entry:', entry);
+// console.log('htmlWebpackPlugins:', htmlWebpackPlugins);
 
 module.exports = {
   /*
@@ -25,10 +70,7 @@ module.exports = {
   */
   mode: 'production',
   //入口
-  entry: {
-    index: path.resolve(__rootname, './src/index/index.js'),
-    search: path.resolve(__rootname, './src/search/index.js')
-  },
+  entry,
   output: {
     path: path.resolve(__rootname, './dist'),
     filename: '[name]_[chunkhash:8].js'
@@ -102,46 +144,9 @@ module.exports = {
       filename: '[name]_[contenthash:8].css'
     }),
     new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
-    new HtmlWebpackPlugin({
-      //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/index/index.html'),
-      //打包出来的html文件名称
-      filename: 'index.html',
-      //指定生成的html要使用哪些chunk
-      chunks: ['index'],
-      //打包出来的chunk中的文件自动注入到生成的html中来
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        // removeComments: false
-        removeComments: true
-      }
-    }),
-    new HtmlWebpackPlugin({
-      //模版里面可以用ejs语法
-      template: path.resolve(__rootname, './public/search/index.html'),
-      //打包出来的html文件名称
-      filename: 'search.html',
-      //指定生成的html要使用哪些chunk
-      chunks: ['search'],
-      //打包出来的chunk中的文件自动注入到生成的html中来
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
     // CSS 内联
     // new HTMLInlineCSSWebpackPlugin(),
     // 默认会删除 output 指定的输出⽬录
     new CleanWebpackPlugin()
-  ]
+  ].concat(htmlWebpackPlugins)
 };
