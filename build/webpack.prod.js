@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const __rootname = process.cwd();
 
 const setMPA = () => {
@@ -25,7 +25,7 @@ const setMPA = () => {
     htmlWebpackPlugins.push(
       new HtmlWebpackPlugin({
         //模版里面可以用ejs语法
-        template: path.resolve(__rootname, `./public/index/${pageName}.html`),
+        template: path.resolve(__rootname, `./public/${pageName}/index.html`),
         //打包出来的html文件名称
         filename: `${pageName}.html`,
         //指定生成的html要使用哪些chunk
@@ -51,8 +51,8 @@ const setMPA = () => {
 };
 
 const { entry, htmlWebpackPlugins } = setMPA();
-// console.log('entry:', entry);
-// console.log('htmlWebpackPlugins:', htmlWebpackPlugins);
+console.log('entry:', entry);
+console.log('htmlWebpackPlugins:', htmlWebpackPlugins);
 
 module.exports = {
   /*
@@ -145,8 +145,10 @@ module.exports = {
     }),
     new OptimizeCSSAssetsPlugin({ assetNameRegExp: /\.(le|c)ss$/g, cssProcessor: require('cssnano') }),
     // CSS 内联
+    // html-webpack-plugin should be ordered first before html-inline-css-webpack-plugin
     // new HTMLInlineCSSWebpackPlugin(),
     // 默认会删除 output 指定的输出⽬录
     new CleanWebpackPlugin()
   ].concat(htmlWebpackPlugins)
+  .concat(new HTMLInlineCSSWebpackPlugin())
 };
